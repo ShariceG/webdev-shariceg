@@ -1,0 +1,35 @@
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <p>
+      <a [routerLink]="['user/:uid/website/:wid/page']" class="cl-text-black cl-icon-padding">
+        <span class="fas fa-chevron-left"></span>
+      </a>
+      <a class="navbar-brand pull-left cl-icon-padding" [routerLink]="['user/:uid/website/:wid/page/:pid']">Edit Page</a>
+    </p>
+    <a [routerLink]="['user/:uid/website/:wid/page']" class="cl-text-black">
+      <span class="fas fa-check fa-pull-right"></span>
+    </a>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Page Name">
+  </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" placeholder="Page Title">
+  </div>
+  <a class="btn btn-danger btn-block"
+     [routerLink]="['user/:uid/website/:wid/page']">Delete</a>
+</div>
+
+
+<nav class="navbar navbar-light bg-light fixed-bottom d-flex flex-row-reverse">
+  <div class="p-2">
+    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-black">
+      <span class="fas fa-user fontawsome_icon"></span>
+    </a>
+  </div>
+</nav>

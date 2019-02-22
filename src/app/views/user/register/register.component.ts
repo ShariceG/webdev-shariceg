@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {UserService} from '../../../services/user.service.client';
+import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +10,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('registerForm') registerForm: NgForm;
+
+  username: string;
+  password: string;
+  vpass: string;
+
+  errorFlag: boolean;
+  errorMessage: string;
+
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.errorFlag = false;
+    this.errorMessage = 'Passwords must match!';
   }
+
+
+  register() {
+    this.username = this.registerForm.value.username;
+    this.password = this.registerForm.value.password;
+    this.vpass = this.registerForm.value.vpass;
+
+    if (this.vpass === this.password) {
+      const user = {_id: '', username: this.username, password: this.password, firstName: '', lastName: ''};
+      this.userService.createUser(user);
+      this.userService.users.push(user);
+      this.errorFlag = false;
+      this.router.navigate(['/user', user._id]);
+    } else {
+      this.errorFlag = true;
+    }
+  }
+
+  // disabled() {
+  //   this.username = this.registerForm.value.username;
+  //   this.password = this.registerForm.value.password;
+  //   this.vpass = this.registerForm.value.vpass;
+  //   return !(this.username && (this.password === this.vpass));
+  // }
 
 }

@@ -1,0 +1,54 @@
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <p>
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']" class="cl-text-black">
+        <span class="fas fa-chevron-left"></span>
+      </a>
+      <a class="navbar-brand pull-left cl-icon-padding" [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Choose Widgets</a>
+    </p>
+  </div>
+</nav>
+
+<div class="container-fluid cl-container-padding">
+  <ul class="list-group cl-list-group-borderless">
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">Header</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Label</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">HTML</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Text Input</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Link</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Button</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">Image</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">YouTube</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Data Table</a>
+    </li>
+    <li class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Repeater</a>
+    </li>
+  </ul>
+</div>
+
+
+<nav class="navbar navbar-light bg-light fixed-bottom d-flex flex-row-reverse">
+  <div class="p-2">
+    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-blue">
+      <span class="fas fa-user fontawsome_icon"></span>
+    </a>
+  </div>
+</nav>

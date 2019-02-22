@@ -1,0 +1,32 @@
+
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <p>
+      <a [routerLink]="['/user/:uid/website']" class="cl-text-black cl-icon-padding">
+        <span class="fas fa-chevron-left"></span>
+      </a>
+      <a class="navbar-brand pull-left cl-icon-padding" [routerLink]="['/user/:uid/website/:wid/page']">Pages</a>
+    </p>
+    <a [routerLink]="['/user/:uid/website/:wid/page/new']" class="cl-text-black cl-icon-padding">
+      <span class="fas fa-plus fa-pull-right"></span>
+    </a>
+  </div>
+</nav>
+
+<div class="container-fluid cl-container-padding">
+  <ul class="list-group cl-list-group-borderless">
+    <li *ngFor="let page of pages" class="list-group-item cl-list-item-borderless">
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']">{{page.name}}</a>
+      <a [routerLink]="['/user/:uid/website/:wid/page/:pid']"><span class="fas fa-cog fontawsome_icon fa-pull-right"></span></a>
+    </li>
+  </ul>
+</div>
+
+
+<nav class="navbar navbar-light bg-light fixed-bottom d-flex flex-row-reverse">
+  <div class="p-2">
+    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-black">
+      <span class="fas fa-user fontawsome_icon"></span>
+    </a>
+  </div>
+</nav>
