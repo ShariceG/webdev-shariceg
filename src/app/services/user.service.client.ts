@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+import {User} from '../Models/user.model.client';
 
 @Injectable()
 
 export class UserService {
   constructor() {}
 
-  users = [{_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
-    {_id: '234', username: 'bob', password: 'bob', firstName: 'Bob', lastName: 'Marley' },
-    {_id: '345', username: 'charly', password: 'charly', firstName: 'Charly', lastName: 'Garcia' },
-    {_id: '456', username: 'jannunzi', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi' }
+  users: User[] = [new User('123', 'alice',  'alice', 'Alice', 'Wonder', 'a@email.com'),
+                   new User('234', 'bob', 'bob', 'Bob', 'Marley', 'b@email.com'),
+                   new User('345', 'charly', 'charly', 'Charly', 'Garcia', 'c@email.com'),
+                   new User('456', 'jannuzi', 'jannuzi', 'Jose', 'Annuzi', 'j@email.com')
   ];
 
   api = {
@@ -20,8 +21,8 @@ export class UserService {
     'deleteUser' : this.deleteUser
   };
 
-  createUser(user: any) {
-    user._id = Math.random();
+  createUser(user: User) {
+    user._id = Math.random().toString();
     this.users.push(user);
 
   }
