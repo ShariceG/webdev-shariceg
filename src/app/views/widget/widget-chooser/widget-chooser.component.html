@@ -1,10 +1,10 @@
 <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <p>
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']" class="cl-text-black">
+      <a (click)="widgetList()" class="cl-text-black">
         <span class="fas fa-chevron-left"></span>
       </a>
-      <a class="navbar-brand pull-left cl-icon-padding" [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Choose Widgets</a>
+      <a class="navbar-brand pull-left cl-icon-padding" (click)="newWidget()">Choose Widgets</a>
     </p>
   </div>
 </nav>
@@ -12,34 +12,34 @@
 <div class="container-fluid cl-container-padding">
   <ul class="list-group cl-list-group-borderless">
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">Header</a>
+      <a (click)="createWidget('header')">Header</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Label</a>
+      <a (click)="newWidget()">Label</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">HTML</a>
+      <a (click)="newWidget()">HTML</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Text Input</a>
+      <a (click)="newWidget()">Text Input</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Link</a>
+      <a (click)="newWidget()">Link</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Button</a>
+      <a (click)="newWidget()">Button</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">Image</a>
+      <a (click)="createWidget('image')">Image</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">YouTube</a>
+      <a (click)="createWidget('youtube')">YouTube</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Data Table</a>
+      <a (click)="newWidget()">Data Table</a>
     </li>
     <li class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']">Repeater</a>
+      <a (click)="newWidget()">Repeater</a>
     </li>
   </ul>
 </div>
@@ -47,7 +47,7 @@
 
 <nav class="navbar navbar-light bg-light fixed-bottom d-flex flex-row-reverse">
   <div class="p-2">
-    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-blue">
+    <a (click)="profile()" class="nav-text cl-text-blue">
       <span class="fas fa-user fontawsome_icon"></span>
     </a>
   </div>

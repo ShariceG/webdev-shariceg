@@ -1,14 +1,14 @@
-<nav class="navbar fixed-top navbar-dark bg-primary">
+<nav class="navbar fixed-top navbar-dark bg-primary cl-text-white">
   <div class="container-fluid">
     <p>
-      <a [routerLink]="['/user/:uid']" class="navbar-link cl-text-white">
+      <a (click)="returnToProfile()" class="navbar-link cl-text-white">
         <span class="fas fa-chevron-left"></span>
       </a>
-      <a class= "navbar-brand mb-0 h1 cl-icon-padding" [routerLink]="['/user/:uid/website']" >
+      <a class= "navbar-brand mb-0 h1 cl-icon-padding" (click) = "list()" >
         Websites
       </a>
     </p>
-    <a [routerLink]="['/user/:uid/website/new']" class="cl-text-white">
+    <a (click)="newWebsite()" class="cl-text-white">
       <span class="portrait fas fa-plus fa-pull-right"></span>
     </a>
   </div>
@@ -17,16 +17,16 @@
 <div class="container">
   <ul class="list-group cl-list-group-borderless">
     <li *ngFor="let website of websites" class="list-group-item cl-list-item-borderless">
-      <a [routerLink]="['/user/:uid/website/:wid']"><span class="portrait fas fa-cog fontawsome_icon fa-pull-right"></span></a>
-      <a [routerLink]="['/user/:uid/website/:wid/page']">{{website.name}}</a>
+      <a (click)="editSite(website._id)"><span class="portrait fas fa-cog fontawsome_icon fa-pull-right"></span></a>
+      <a (click)="viewPage(website._id)">{{website.name}}</a>
     </li>
   </ul>
 </div>
 
 
-<nav class="navbar fixed-bottom navbar-dark bg-primary d-flex flex-row-reverse">
+<nav class="navbar fixed-bottom navbar-dark bg-primary d-flex flex-row-reverse cl-text-white">
   <div class="p-2">
-    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-white">
+    <a (click)="profile()" class="nav-text cl-text-white">
       <span class="fas fa-user fontawsome_icon fa-pull-right"></span>
     </a>
   </div>

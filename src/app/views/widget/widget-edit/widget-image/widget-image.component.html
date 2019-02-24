@@ -1,48 +1,54 @@
 <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <p>
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']" class="cl-text-black">
+      <a (click)="widgetList()" class="cl-text-black">
         <span class="fas fa-chevron-left"></span>
       </a>
-      <a class="navbar-brand pull-left cl-icon-padding" [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">Widget Edit</a>
+      <a class="navbar-brand pull-left cl-icon-padding" (click)="widgetEdit()">Widget Edit</a>
     </p>
-    <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']" class="cl-text-black">
+    <a (click)="widgetList()" class="cl-text-black">
       <span class="fas fa-check fa-pull-right"></span>
     </a>
   </div>
 </nav>
 
 <div class="container">
-  <form>
+  <form (ngSubmit) = "updateImage()" #imageForm="ngForm">
     <div class="form-group">
       <label for="image-name">Name</label>
-      <input type="text" class="form-control" id="image-name" placeholder="Name">
+      <input [(ngModel)]="widget.name" name="name" type="text" class="form-control" id="image-name" placeholder="Name">
     </div>
     <div class="form-group">
       <label for="image-text">Text</label>
-      <input type="text" class="form-control" id="image-text" placeholder="Text">
+      <input [(ngModel)]="widget.text" name="text" type="text" class="form-control" id="image-text" placeholder="Text">
     </div>
     <div class="form-group">
       <label for="image-URL">URL</label>
-      <input type="text" class="form-control" id="image-URL" placeholder="URL">
+      <input [(ngModel)]="widget.url" name="url" type="text" class="form-control" id="image-URL" placeholder="URL">
     </div>
     <div class="form-group">
       <label for="image-width">Width</label>
-      <input type="text" class="form-control" id="image-width" placeholder="100%">
+      <input [(ngModel)]="widget.width" name="width" type="text" class="form-control" id="image-width" placeholder="100%">
     </div>
     <div class="form-group">
       <label for="exampleInputFile">Upload</label>
-      <input type="file" class="form-control" id="exampleInputFile">
+      <input type="file"
+             name="imageUrl"
+             class="form-control"
+             id="exampleInputFile"
+             ngModel required imageUrl="ngModel">
     </div>
+    <button type="submit" class="btn btn-primary btn-block"
+            [disabled] = "!imageForm.valid">Upload Image</button>
+    <button class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</button>
+
   </form>
-  <a class="btn btn-primary btn-block" [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">Upload Image</a>
-  <a class="btn btn-danger  btn-block" [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']">Delete</a>
 </div>
 
 
 <nav class="navbar navbar-light bg-light fixed-bottom d-flex flex-row-reverse">
   <div class="p-2">
-    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-blue">
+    <a (click)="profile()" class="nav-text cl-text-blue">
       <span class="fas fa-user fontawsome_icon"></span>
     </a>
   </div>

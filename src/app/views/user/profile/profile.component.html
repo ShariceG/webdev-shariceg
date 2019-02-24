@@ -1,7 +1,8 @@
-<nav class="navbar navbar-dark fixed-top bg-primary">
+<script src="profile.component.ts"></script>
+<nav class="navbar navbar-dark fixed-top bg-primary cl-text-white">
   <div class="container-fluid">
     <p>
-      <a class= "navbar-brand mb-0 h1 cl-icon-padding" [routerLink]="['/user/:uid']" >
+      <a class= "navbar-brand mb-0 h1 cl-icon-padding" (click)="profile()" >
         Profile
       </a>
     </p>
@@ -34,16 +35,16 @@
 
   <button class="btn btn-primary btn-block"
      (click)="websites()" >Websites</button>
-  <a class="btn btn-danger  btn-block"
-     [routerLink]="['/login']">Logout</a>
+  <button class="btn btn-danger  btn-block"
+     [routerLink]="['/login']">Logout</button>
 </div>
 <br>
 
 
 
-<nav class="navbar fixed-bottom navbar-dark bg-primary d-flex flex-row-reverse">
+<nav class="navbar fixed-bottom navbar-dark bg-primary d-flex flex-row-reverse cl-text-white">
   <div class="p-2">
-    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-white">
+    <a (click)="profile()" class="nav-text cl-text-white">
       <span class="fas fa-user fontawsome_icon fa-pull-right"></span>
     </a>
   </div>

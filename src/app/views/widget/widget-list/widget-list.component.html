@@ -1,12 +1,12 @@
 <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <p>
-      <a [routerLink]="['/user/:uid/website/:wid/page']" class="cl-text-black">
+      <a (click) = "returnToPageList()" class="cl-text-black">
         <span class="fas fa-chevron-left"></span>
       </a>
-      <a class="navbar-brand pull-left cl-icon-padding" [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']">Choose Widgets</a>
+      <a class="navbar-brand pull-left cl-icon-padding" (click) = "widgetList()">Choose Widgets</a>
     </p>
-    <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/new']" class="cl-text-black cl-icon-padding">
+    <a (click) = "newWidget()" class="cl-text-black cl-icon-padding">
       <span class="fas fa-plus fa-pull-right"></span>
     </a>
   </div>
@@ -16,10 +16,10 @@
   <div [ngSwitch]="widget.widgetType">
     <div *ngSwitchCase= '"HEADING"'>
       <div class="pull-right">
-        <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']" class="pull-right">
+        <a (click)="editWidget(widget._id)" class="pull-right">
           <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
         </a>
-        <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']">
+        <a (click) = "widgetList()">
           <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
         </a>
       </div>
@@ -28,10 +28,10 @@
 
     <div *ngSwitchCase='"IMAGE"'>
       <div>
-        <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']" class="pull-right">
+        <a (click)="editWidget(widget._id)" class="pull-right">
           <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
         </a>
-        <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']" class="pull-right">
+        <a (click) = "widgetList()" class="pull-right">
           <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
         </a>
         <img class="img-responsive img-rounded cl-widget-images"
@@ -42,22 +42,21 @@
     <div *ngSwitchCase='"YOUTUBE"'>
       <div class="embed-responsive embed-responsive-16by9">
         <iframe width="640" height="360" [src]="safe(widget.url)" frameborder="0" allowfullscreen></iframe>
-        <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']" class="pull-right">
-          <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
-        </a>
-        <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']" class="pull-right">
-          <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
-        </a>
-      </div>"
+      </div>
+      <a (click)="editWidget(widget._id)" class="pull-right">
+        <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
+      </a>
+      <a (click) = "widgetList()" class="pull-right">
+        <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
+      </a>
     </div>
-
   </div>
 </div>
 
 
 <nav class="navbar navbar-light bg-light fixed-bottom d-flex flex-row-reverse">
   <div class="p-2">
-    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-blue">
+    <a (click)="profile()" class="nav-text cl-text-blue">
       <span class="fas fa-user fontawsome_icon"></span>
     </a>
   </div>

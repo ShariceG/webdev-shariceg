@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import {Website} from '../Models/website.model.client';
 
 @Injectable()
 
 export class WebsiteService {
   constructor() {}
 
-  websites = [{'_id': '123', 'name': 'Facebook', 'developerId': '456', 'description': 'Lorem'},
-    {'_id': '234', 'name': 'Tweeter', 'developerId': '456', 'description': 'Lorem'},
-    {'_id': '456', 'name': 'Gizmodo', 'developerId': '456', 'description': 'Lorem'},
-    {'_id': '890', 'name': 'Go', 'developerId': '123', 'description': 'Lorem'},
-    {'_id': '567', 'name': 'Tic Tac Toe', 'developerId': '123', 'description': 'Lorem'},
-    {'_id': '678', 'name': 'Checkers', 'developerId': '123', 'description': 'Lorem'},
-    {'_id': '789', 'name': 'Chess', 'developerId': '234', 'description': 'Lorem'}];
+  websites = [new Website('123', 'Facebook', '456', 'Lorem'),
+    new Website('234', 'Tweeter', '456', 'Lorem'),
+    new Website('456', 'Gizmodo', '456', 'Lorem'),
+    new Website('890', 'Go', '123', 'Lorem'),
+    new Website('567', 'Tic Tac Toe', '123', 'Lorem'),
+    new Website('678', 'Checkers', '123', 'Lorem'),
+    new Website('789', 'Chess', '234', 'Lorem')]
+
 
   api = {
     'createWebsite' : this.createWebsite,
@@ -21,8 +23,8 @@ export class WebsiteService {
     'deleteWebsite' : this.deleteWebsite
   };
 
-  createWebsite(website: any) {
-    website._id = Math.random();
+  createWebsite(website: Website) {
+    website._id = Math.random().toString();
     this.websites.push(website);
   }
 

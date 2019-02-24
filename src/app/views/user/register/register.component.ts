@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
     if (this.vpass === this.password) {
       const user = new User('', this.username, this.password, '', '', '');
       this.userService.createUser(user);
-      this.userService.users.push(user);
       this.errorFlag = false;
       this.router.navigate(['/user', user._id]);
     } else {

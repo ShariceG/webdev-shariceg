@@ -1,12 +1,12 @@
 <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <p>
-      <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']" class="cl-text-black">
+      <a (click)="widgetList()" class="cl-text-black">
         <span class="fas fa-chevron-left"></span>
       </a>
-      <a class="navbar-brand pull-left cl-icon-padding" [routerLink]="['/user/:uid/website/:wid/page/:pid/widget/:wgid']">Widgets Edit</a>
+      <a class="navbar-brand pull-left cl-icon-padding" (click)="widgetEdit()">Widgets Edit</a>
     </p>
-    <a [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']" class="cl-text-black">
+    <a (click)="widgetList()" class="cl-text-black">
       <span class="fas fa-check fa-pull-right"></span>
     </a>
   </div>
@@ -15,24 +15,24 @@
 <div class="container-fluid">
   <div class="form-group">
     <label for="heading-name">Name</label>
-    <input type="text" class="form-control" id="heading-name" placeholder="Header Name">
+    <input [(ngModel)]="widget.name" type="text" class="form-control" id="heading-name" placeholder="Header Name">
   </div>
   <div class="form-group">
     <label for="heading-text">Text</label>
-    <input type="text" class="form-control" id="heading-text" placeholder="Header Text">
+    <input [(ngModel)]="widget.text" type="text" class="form-control" id="heading-text" placeholder="Header Text">
   </div>
   <div class="form-group">
     <label for="heading-size">Size</label>
-    <input type="text" class="form-control" id="heading-size" placeholder="Ex: 1,2,3...">
+    <input [(ngModel)]="widget.size" type="text" class="form-control" id="heading-size" placeholder="Ex: 1,2,3...">
   </div>
-  <a class="btn btn-danger btn-block"
-     [routerLink]="['/user/:uid/website/:wid/page/:pid/widget']">Delete</a>
+  <button class="btn btn-danger btn-block"
+     (click)="deleteWidget()">Delete</button>
 </div>
 
 
 <nav class="navbar navbar-light bg-light fixed-bottom d-flex flex-row-reverse">
   <div class="p-2">
-    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-blue">
+    <a (click) = "profile()" class="nav-text cl-text-blue">
       <span class="fas fa-user fontawsome_icon"></span>
     </a>
   </div>

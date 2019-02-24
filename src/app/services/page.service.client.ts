@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
+import {Page} from '../Models/page.model.client';
 
 @Injectable()
 
 export class PageService {
   constructor() {}
 
-  pages = [{'_id': '321', 'name': 'Post 1', 'websiteId': '456', 'description': 'Lorem'},
-    {'_id': '432', 'name': 'Post 2', 'websiteId': '456', 'description': 'Lorem'},
-    {'_id': '543', 'name': 'Post 3', 'websiteId': '456', 'description': 'Lorem'}
-    ];
+  pages: Page[] = [new Page('321', 'Post1', '456', 'Lorem'),
+    new Page('432', 'Post2', '456', 'Lorem'),
+    new Page('543', 'Post3', '456', 'Lorem')];s
 
   api = {
     'createPage' : this.createPage,
@@ -18,8 +18,8 @@ export class PageService {
     'deletePage' : this.deletePage
   };
 
-  createPage(page: any) {
-    page._id = Math.random();
+  createPage(page: Page) {
+    page._id = Math.random().toString();
     this.pages.push(page);
   }
 
@@ -41,7 +41,7 @@ export class PageService {
     }
   }
 
-  updatePage(pageId: string, page: any) {
+  updatePage(pageId: string, page: Page) {
     const newPage = page;
     newPage._id = pageId;
     for ( let x = 0; x < this.pages.length; x++) {

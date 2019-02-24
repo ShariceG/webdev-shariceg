@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
+import {WidgetService} from '../../../services/widget.service.client';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Widget} from '../../../Models/widget.model.client';
 
 @Component({
   selector: 'app-widget-edit',
@@ -8,10 +11,24 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class WidgetEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private widgetService: WidgetService, private router: Router, private route: ActivatedRoute) { }
+
+  userId: string;
+  websiteId: string;
+  pageId: string;
+  widgetId: string;
+  widget: Widget;
 
   ngOnInit() {
+    this.route.params.subscribe(
+      (params: any) => {
+        this.userId = params['uid'];
+        this.websiteId = params['wid'];
+        this.pageId = params['pid'];
+        this.widgetId = params['wgid'];
+      }
+    );
+    this.widget = this.widgetService.findWidgetById(this.widgetId);
+    console.log(this.widget);
   }
-
-
 }

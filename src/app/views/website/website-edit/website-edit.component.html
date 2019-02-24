@@ -3,14 +3,14 @@
     <div class="landscape  col-4">
       <div class="container-fluid">
         <p>
-          <a [routerLink]="['user/:uid/website']" class="navbar-link cl-text-white">
+          <a (click)="websiteList()" class="navbar-link cl-text-white">
             <span class="fas fa-chevron-left"></span>
           </a>
           <a class= "navbar-brand mb-0 h1 cl-icon-padding" [routerLink]="['user/:uid/website/:wid']" >
             Websites
           </a>
 
-          <a [routerLink]="['user/:uid/website/new']" class="cl-text-white ">
+          <a (click)="newSite()" class="cl-text-white">
             <span class="fas fa-plus fa-pull-right"></span>
           </a>
         </p>
@@ -37,21 +37,9 @@
   <div class="row">
     <div class="landscape col-4">
       <ul class="list-group cl-list-group-borderless">
-        <li class="list-group-item cl-list-item-borderless">
-          <a [routerLink]="['user/:uid/website/:wid']"><span class="fas fa-cog fontawsome_icon fa-pull-right"></span></a>
-          <a [routerLink]="['user/:uid/website/:wid/page']">Blogging App</a>
-        </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a [routerLink]="['user/:uid/website/:wid']"><span class="fas fa-cog fontawsome_icon fa-pull-right"></span></a>
-          <a [routerLink]="['user/:uid/website/:wid/page']">Address Book App</a>
-        </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a [routerLink]="['user/:uid/website/:wid']"><span class="fas fa-cog fontawsome_icon fa-pull-right"></span></a>
-          <a [routerLink]="['user/:uid/website/:wid/page']">Script Testing App</a>
-        </li>
-        <li class="list-group-item cl-list-item-borderless">
-          <a [routerLink]="['user/:uid/website/:wid']"><span class="fas fa-cog fontawsome_icon fa-pull-right"></span></a>
-          <a [routerLink]="['user/:uid/website/:wid/page']">Blogger</a>
+        <li *ngFor="let website of websites" class="list-group-item cl-list-item-borderless">
+          <a (click)="editSite(website._id)"><span class="fas fa-cog fontawsome_icon fa-pull-right"></span></a>
+          <a (click)="pageList(website._id)">{{website.name}}</a>
         </li>
       </ul>
     </div>
@@ -59,23 +47,23 @@
       <form>
         <div class="form-group">
           <label for="website-name">Website Name</label>
-          <input type="text" class="form-control" id="website-name" placeholder="Website Name">
+          <input [(ngModel)]="website.name" name="websiteName" type="text" class="form-control" id="website-name" placeholder="Website Name">
         </div>
         <div class="form-group">
           <label for="website-description">Website Description</label>
-          <textarea id="website-description" class="form-control" rows="5"
+          <textarea [(ngModel)]="website.description" name="websiteDescription" id="website-description" class="form-control" rows="5"
                     placeholder="Website Description"></textarea>
         </div>
-        <a class="btn btn-danger btn-block"
-           [routerLink]="['/user/:uid/website']">Delete</a>
+        <button class="btn btn-danger btn-block"
+           (click)="deleteSite()">Delete</button>
       </form>
     </div>
   </div>
 </div>
 
-<nav class="navbar fixed-bottom navbar-dark bg-primary d-flex flex-row-reverse">
+<nav class="navbar fixed-bottom navbar-dark bg-primary d-flex flex-row-reverse cl-text-white">
   <div class="p-2">
-    <a [routerLink]="['/user/:uid']" class="nav-text cl-text-white">
+    <a (click)="profile()" class="nav-text cl-text-white">
       <span class="fas fa-user fontawsome_icon fa-pull-right"></span>
     </a>
   </div>

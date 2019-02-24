@@ -46,6 +46,10 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/user', this.user._id, 'website' ]);
   }
 
+  profile() {
+    this.router.navigate(['/user', this.user._id]);
+  }
+
 
 
 }
