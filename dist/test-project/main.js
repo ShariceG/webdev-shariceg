@@ -201,6 +201,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
+    { path: '', component: _views_user_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'login', component: _views_user_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'user/:uid', component: _views_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_4__["ProfileComponent"] },
     { path: 'register', component: _views_user_register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"] },
@@ -250,7 +251,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n\n<a routerLink=\"/login\">Login</a>\n<a routerLink=\"/register\">Register</a>\n<a routerLink=\"/profile\">Profile</a>\n\n<router-outlet></router-outlet>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n\n<!--<a routerLink=\"/login\">Login</a>-->\n<!--<a routerLink=\"/register\">Register</a>-->\n<!--<a routerLink=\"/profile\">Profile</a>-->\n\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -1154,7 +1155,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <span class=\" form-control alert alert-danger\" *ngIf=\"errorFlag\">\n      {{ errorMessage }}\n    </span>\n\n  <h1>\n    Register\n  </h1>\n  <form (ngSubmit) = \"register()\" #registerForm=\"ngForm\">\n    <input type=\"text\"\n           name = username\n           class=\"form-control\"\n           ngModel required #username=\"ngModel\"\n           placeholder=\"username\"/>\n    <input type=\"text\"\n           name = \"password\"\n           class=\"form-control\"\n           ngModel required #password=\"ngModel\"\n           placeholder=\"password\"/>\n    <input type=\"text\"\n           name = \"vpass\"\n           class=\"form-control\"\n           ngModel required #vpass=\"ngModel\"\n           placeholder=\"verify password\"/>\n    <button class=\"btn btn-primary btn-block\"\n            type = \"submit\"\n            [disabled] = \"!registerForm.valid\">\n      Register</button>\n\n    <a class=\"btn btn-danger btn-block\"\n       [routerLink]=\"['/login']\">Cancel</a>\n  </form>\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <span class=\" form-control alert alert-danger\" *ngIf=\"errorFlag\">\n      {{ errorMessage }}\n    </span>\n\n  <h1>\n    Register\n  </h1>\n  <form (ngSubmit) = \"register()\" #registerForm=\"ngForm\">\n    <input type=\"text\"\n           name = username\n           class=\"form-control\"\n           ngModel required #username=\"ngModel\"\n           placeholder=\"username\"/>\n    <input type=\"password\"\n           name = \"password\"\n           class=\"form-control\"\n           ngModel required #password=\"ngModel\"\n           placeholder=\"password\"/>\n    <input type=\"password\"\n           name = \"vpass\"\n           class=\"form-control\"\n           ngModel required #vpass=\"ngModel\"\n           placeholder=\"verify password\"/>\n    <button class=\"btn btn-primary btn-block\"\n            type = \"submit\"\n            [disabled] = \"!registerForm.valid\">\n      Register</button>\n\n    <a class=\"btn btn-danger btn-block\"\n       [routerLink]=\"['/login']\">Cancel</a>\n  </form>\n\n\n</div>\n"
 
 /***/ }),
 
