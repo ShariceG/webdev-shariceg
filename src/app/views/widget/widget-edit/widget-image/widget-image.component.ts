@@ -16,6 +16,7 @@ export class WidgetImageComponent implements OnInit {
   userId: string;
   websiteId: string;
   pageId: string;
+  widgetId: string;
   widget: Image;
 
   errorFlag: boolean;
@@ -30,14 +31,26 @@ export class WidgetImageComponent implements OnInit {
       this.userId = params['uid'];
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
-      this.widget = this.widgetService.findWidgetById(params['wgid']);
+      this.widgetId = params['wgid'];
+      // this.widget = this.widgetService.findWidgetById(params['wgid']);
     });
+    this.widgetService.findWidgetById(this.widgetId)
+      .subscribe(
+        (data: any) => {
+          this.widget = data;
+        }
+      );
     console.log(this.widget);
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widget._id);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.deleteWidget(this.widget._id)
+      .subscribe(
+        (data: any) => {
+          const message = data;
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+        }
+      );
   }
 
   profile() {
@@ -53,11 +66,29 @@ export class WidgetImageComponent implements OnInit {
   }
 
   updateImage() {
-    const newurl = this.imageForm.value.imageUrl;
-    console.log(newurl);
+    let url = this.widget.url;
+    if (this.imageForm.value.imageUrl) {
+      url = this.imageForm.value.imageUrl;
+    }
+
+    const body = {
+      name: this.widget.name,
+      text: this.widget.text,
+      url: url,
+      width: this.widget.width
+    };
+    this.widgetService.updateWidget(this.widgetId, body)
+      .subscribe(
+        (data: any) => {
+          this.widget = data;
+          this.widgetList();
+        }
+      );
+
+    // const newurl = this.imageForm.value.imageUrl;
+    // console.log(newurl);
     // const newWidget = new Image(this.widget._id, this.widget.name, this.widget.pageId, this.widget.text, this.widget.width, newurl);
-    this.widget.url = newurl;
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    // this.widget.url = newurl;
   }
 
 }

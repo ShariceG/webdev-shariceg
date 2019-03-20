@@ -6,14 +6,14 @@
       </a>
       <a class="navbar-brand pull-left cl-icon-padding" (click)="widgetEdit()">Widget Edit</a>
     </p>
-    <a (click)="widgetList()" class="cl-text-black">
+    <a (click)="youtubeForm.ngSubmit.emit()" class="cl-text-black">
       <span class="fas fa-check fa-pull-right"></span>
     </a>
   </div>
 </nav>
 
 <div class="container">
-  <form>
+  <form (ngSubmit) = "updateYoutube()" #youtubeForm="ngForm">
     <div class="form-group">
       <label for="youtube-name">Name</label>
       <input [(ngModel)]="widget.name" name="name" type="text" class="form-control" id="youtube-name" placeholder="Name">

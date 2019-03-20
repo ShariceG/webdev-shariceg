@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 
 export class User {
+
+
   _id: String;
   username: String;
   password: String;
@@ -28,18 +31,43 @@ export class User {
 })
 export class ProfileComponent implements OnInit {
 
+  @ViewChild('profileForm') profileForm: NgForm;
+
   constructor( private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
-  user: User;
+  userId: String;
+  user: any;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.user = this.userService.findUserById(params['uid']);
+      this.userId = params['uid'];
+      console.log('user id: ' + this.userId);
     });
+
+    this.userService.findUserById(this.userId)
+      .subscribe(
+        (data: any) => {
+          this.user = data;
+        }
+      );
   }
 
-  updateUser(user) {
+  updateUser() {
     console.log(this.user);
+
+    const body = {
+      username: this.user.username,
+      email: this.user.email,
+      firstName: this.user.firstName,
+      lastName: this.user.lastName
+    };
+
+    this.userService.updateUser(this.user, body)
+      .subscribe(
+        (data: any) => {
+          this.user = data;
+        }
+      );
   }
 
   websites() {

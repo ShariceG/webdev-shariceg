@@ -14,6 +14,7 @@ export class WidgetChooserComponent implements OnInit {
   websiteId: string;
   pageId: string;
   widget: any;
+  body: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private widgetService: WidgetService) { }
 
@@ -32,22 +33,49 @@ export class WidgetChooserComponent implements OnInit {
   createWidget(type: string) {
     const widgetType = type.toUpperCase();
     switch (widgetType) {
-      case 'HEADER': {
-        this.widget = new Heading('', '', this.pageId, 4, '');
+      case 'HEADING': {
+        this.body = {
+          name: '',
+          widgetType: 'HEADING',
+          size: 4,
+          text: ''
+        };
         break;
       }
       case 'YOUTUBE': {
-        this.widget = new YouTube('', '', this.pageId, '', '100%', '');
+        this.body = {
+          name: '',
+          widgetType: 'YOUTUBE',
+          width: '100%',
+          url: ''
+        };
         break;
       }
       case 'IMAGE': {
-        this.widget = new Image('', '', this.pageId, '', '100%', '');
+        this.body = {
+          name: '',
+          widgetType: 'IMAGE',
+          width: '100%',
+          url: ''
+        };
         break;
       }
     }
 
-    this.widgetService.createWidget(this.widget);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widget._id]);
+    this.widgetService.createWidget(this.pageId, this.body)
+      .subscribe(
+        (data: any) => {
+          this.widget = data;
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widget._id]);
+          console.log(this.widget);
+        }
+      );
+
+    // this.router.navigate(['/user', this.userId]);
+    // this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widget._id]);
+
+    // this.widgetService.createWidget(this.widget);
+
 
   }
 

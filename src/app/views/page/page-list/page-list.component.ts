@@ -22,8 +22,12 @@ export class PageListComponent implements OnInit {
         this.websiteId = params['wid'];
       }
     );
-    this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
-    console.log(this.pages);
+    this.pageService.findPagesByWebsiteId(this.websiteId)
+      .subscribe(
+        (data: any) => {
+          this.pages = data;
+        }
+      );
   }
 
   widgetList(id: string) {

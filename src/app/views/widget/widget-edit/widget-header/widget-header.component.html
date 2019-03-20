@@ -6,25 +6,27 @@
       </a>
       <a class="navbar-brand pull-left cl-icon-padding" (click)="widgetEdit()">Widgets Edit</a>
     </p>
-    <a (click)="widgetList()" class="cl-text-black">
+    <a (click)="headerForm.ngSubmit.emit()" class="cl-text-black">
       <span class="fas fa-check fa-pull-right"></span>
     </a>
   </div>
 </nav>
 
 <div class="container-fluid">
+  <form (ngSubmit) = "updateHeader()" #headerForm="ngForm">
   <div class="form-group">
     <label for="heading-name">Name</label>
-    <input [(ngModel)]="widget.name" type="text" class="form-control" id="heading-name" placeholder="Header Name">
+    <input [(ngModel)]="widget.name" type="text" name="name" class="form-control" id="heading-name" placeholder="Header Name">
   </div>
   <div class="form-group">
     <label for="heading-text">Text</label>
-    <input [(ngModel)]="widget.text" type="text" class="form-control" id="heading-text" placeholder="Header Text">
+    <input [(ngModel)]="widget.text" type="text" class="form-control" name="text" id="heading-text" placeholder="Header Text">
   </div>
   <div class="form-group">
     <label for="heading-size">Size</label>
-    <input [(ngModel)]="widget.size" type="text" class="form-control" id="heading-size" placeholder="Ex: 1,2,3...">
+    <input [(ngModel)]="widget.size" type="text" class="form-control" name="size" id="heading-size" placeholder="Ex: 1,2,3...">
   </div>
+  </form>
   <button class="btn btn-danger btn-block"
      (click)="deleteWidget()">Delete</button>
 </div>

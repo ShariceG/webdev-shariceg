@@ -1,11 +1,15 @@
 import {DomSanitizer} from '@angular/platform-browser';
 import {Injectable, SecurityContext} from '@angular/core';
 import {Heading, Widget, Image, YouTube} from '../Models/widget.model.client';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 
 export class WidgetService {
-  constructor() {}
+  constructor(private _http: HttpClient) {}
+
+  baseUrl = environment.baseUrl;
 
   widgets: any = [(new Heading('123', 'Heading 1', '321', 2, 'GIZMODO')),
     (new Heading('234', 'Heading 2', '321', 4, 'Lorem ipsum')),
@@ -35,44 +39,79 @@ export class WidgetService {
     'deleteWidget' : this.deleteWidget
   };
 
-  createWidget(widget: any) {
-    widget._id = Math.random().toString();
-    this.widgets.push(widget);
+  createWidget(pageId: String, body: any) {
+    const url = 'api/page/' + pageId + '/widget';
+    return this._http.post(url, body);
   }
+
+  // createWidget(widget: any) {
+  //   widget._id = Math.random().toString();
+  //   this.widgets.push(widget);
+  // }
 
   findWidgetsByPageId(pageId: string) {
-    const list = [];
-    for ( let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x].pageId === pageId) {
-        list.push(this.widgets[x]);
-      }
-    }
-    return list;
+    const url = 'api/page/' + pageId + '/widget';
+    return this._http.get(url)
+      .map(
+        (res: Response) => {
+          return res;
+        }
+      );
   }
+
+  // findWidgetsByPageId(pageId: string) {
+  //   const list = [];
+  //   for ( let x = 0; x < this.widgets.length; x++) {
+  //     if (this.widgets[x].pageId === pageId) {
+  //       list.push(this.widgets[x]);
+  //     }
+  //   }
+  //   return list;
+  // }
 
   findWidgetById(widgetId: string) {
-    for ( let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x]._id === widgetId) {
-        return this.widgets[x];
-      }
-    }
+    const url = 'api/widget/' + widgetId;
+    return this._http.get(url)
+      .map(
+        (res: Response) => {
+          return res;
+        }
+      );
   }
 
-  updateWidget(widgetId: string, widget: Widget) {
-    const newWidget = widget;
-    newWidget._id = widgetId;
-    for ( let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x] === widget) {
-        this.widgets[x] = newWidget;
-      }
-    }
+  // findWidgetById(widgetId: string) {
+  //   for ( let x = 0; x < this.widgets.length; x++) {
+  //     if (this.widgets[x]._id === widgetId) {
+  //       return this.widgets[x];
+  //     }
+  //   }
+  // }
+
+  updateWidget(widgetId: string, body: any) {
+    const url = 'api/widget/' + widgetId;
+    return this._http.put(url, body);
   }
+
+  // updateWidget(widgetId: string, widget: Widget) {
+  //   const newWidget = widget;
+  //   newWidget._id = widgetId;
+  //   for ( let x = 0; x < this.widgets.length; x++) {
+  //     if (this.widgets[x] === widget) {
+  //       this.widgets[x] = newWidget;
+  //     }
+  //   }
+  // }
 
   deleteWidget(widgetId: string) {
-    for ( let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x]._id === widgetId) {
-        this.widgets.splice(x, 1);
-      }
-    }
+    const url = 'api/widget/' + widgetId;
+    return this._http.delete(url);
   }
+  //
+  // deleteWidget(widgetId: string) {
+  //   for ( let x = 0; x < this.widgets.length; x++) {
+  //     if (this.widgets[x]._id === widgetId) {
+  //       this.widgets.splice(x, 1);
+  //     }
+  //   }
+  // }
 }

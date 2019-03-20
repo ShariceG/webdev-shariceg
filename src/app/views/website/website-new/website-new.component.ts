@@ -18,6 +18,7 @@ export class WebsiteNewComponent implements OnInit {
   websiteDescription: string;
   userId: string;
   websites: Website[];
+  website: any;
 
   errorFlag: boolean;
   errorMessage: string;
@@ -32,7 +33,13 @@ export class WebsiteNewComponent implements OnInit {
         this.userId = params['uid'];
       }
     );
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
+    this.websiteService.findWebsitesByUser(this.userId)
+      .subscribe(
+        (data: any) => {
+          this.websites = data;
+        }
+      );
+    // this.websites = this.websiteService.findWebsitesByUser(this.userId);
   }
 
   createWebsite() {
@@ -41,15 +48,34 @@ export class WebsiteNewComponent implements OnInit {
 
     console.log(this.websiteName);
     console.log(this.websiteDescription);
-    if (this.websiteName && this.websiteDescription) {
-      this.errorFlag = false;
-      const website = new Website('', this.websiteName, this.userId, this.websiteDescription);
-      this.websiteService.createWebsite(website);
-      this.router.navigate(['/user', this.userId, 'website']);
 
+    const body = {
+      websiteName: this.websiteName,
+      websiteDescription: this.websiteDescription
+    };
+    if (this.websiteName && this.websiteDescription) {
+      this.websiteService.createWebsite(this.userId, body)
+        .subscribe(
+          (data: any) => {
+            this.website = data;
+            this.errorFlag = false;
+            this.router.navigate(['/user', this.userId, 'website']);
+          },
+          (error: any) => {
+            this.errorFlag = true;
+          }
+        );
     } else {
       this.errorFlag = true;
     }
+    //   this.errorFlag = false;
+    //   const website = new Website('', this.websiteName, this.userId, this.websiteDescription);
+    //   this.websiteService.createWebsite(website);
+    //   this.router.navigate(['/user', this.userId, 'website']);
+    //
+    // } else {
+    //   this.errorFlag = true;
+    // }
   }
 
   websiteList() {

@@ -23,7 +23,7 @@
             Edit Website
           </a>
         </p>
-        <a [routerLink]="['user/:uid/website']" class="cl-text-white">
+        <a (click)="websiteForm.ngSubmit.emit()" class="cl-text-white">
           <span class="fas fa-check fa-pull-right"></span>
         </a>
       </div>
@@ -44,19 +44,19 @@
       </ul>
     </div>
     <div class="col-8">
-      <form>
+      <form (ngSubmit) = "updateWebsite()" #websiteForm="ngForm">
         <div class="form-group">
-          <label for="website-name">Website Name</label>
-          <input [(ngModel)]="website.name" name="websiteName" type="text" class="form-control" id="website-name" placeholder="Website Name">
+          <label for="websiteName">Website Name</label>
+          <input [(ngModel)]="website.name" name="websiteName" type="text" class="form-control" id="websiteName" placeholder="Website Name">
         </div>
         <div class="form-group">
-          <label for="website-description">Website Description</label>
-          <textarea [(ngModel)]="website.description" name="websiteDescription" id="website-description" class="form-control" rows="5"
+          <label for="websiteDescription">Website Description</label>
+          <textarea [(ngModel)]="website.description" name="websiteDescription" id="websiteDescription" class="form-control" rows="5"
                     placeholder="Website Description"></textarea>
         </div>
-        <button class="btn btn-danger btn-block"
-           (click)="deleteSite()">Delete</button>
       </form>
+      <button class="btn btn-danger btn-block"
+              (click)="deleteSite()">Delete</button>
     </div>
   </div>
 </div>

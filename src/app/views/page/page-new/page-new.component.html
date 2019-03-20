@@ -6,22 +6,36 @@
       </a>
       <a class="navbar-brand pull-left cl-icon-padding" (click)="newPage()">New Page</a>
     </p>
-    <a (click)="pageList()" class="cl-text-black">
+    <a (click)="pageForm.ngSubmit.emit()" class="cl-text-black">
       <span class="fas fa-check fa-pull-right"></span>
     </a>
   </div>
 </nav>
 
 <div class="container-fluid">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" placeholder="Page Name">
-  </div>
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" placeholder="Page Title">
-  </div>
-
+  <span class=" form-control alert alert-danger" *ngIf="errorFlag">
+      {{ errorMessage }}
+    </span>
+  <form (ngSubmit) = "addPage()" #pageForm="ngForm">
+    <div class="form-group">
+      <label for="pageName">Name</label>
+      <input type="text"
+             name="pageName"
+             class="form-control"
+             id="pageName"
+             ngModel required pageName="NgModel"
+             placeholder="Page Name">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text"
+             name = "description"
+             class="form-control"
+             id="description"
+             ngModel required description="ngModel"
+             placeholder="Page Description">
+    </div>
+  </form>
 </div>
 
 

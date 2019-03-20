@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   username: string;
   password: string;
   vpass: string;
+  user: any;
 
   errorFlag: boolean;
   errorMessage: string;
@@ -34,10 +35,17 @@ export class RegisterComponent implements OnInit {
     this.vpass = this.registerForm.value.vpass;
 
     if (this.vpass === this.password) {
-      const user = new User('', this.username, this.password, '', '', '');
-      this.userService.createUser(user);
-      this.errorFlag = false;
-      this.router.navigate(['/user', user._id]);
+      this.userService.createUser(this.username, this.password)
+        .subscribe(
+          (data: any) => {
+            this.user = data;
+            this.errorFlag = false;
+            this.router.navigate(['/user', this.user._id]);
+          },
+          (error: any) => {
+            this.errorFlag = true;
+          }
+        );
     } else {
       this.errorFlag = true;
     }
