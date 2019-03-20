@@ -27,6 +27,8 @@ import {UserService} from './services/user.service.client';
 import {WebsiteService} from './services/website.service.client';
 import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
+import { SortableDirective } from './directives/sortable.directive';
+import { OrderByPipe} from './views/widget/widget-list/order-by-pip.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import {WidgetService} from './services/widget.service.client';
     WidgetListComponent,
     WidgetHeaderComponent,
     WidgetImageComponent,
-    WidgetYoutubeComponent
+    WidgetYoutubeComponent,
+    SortableDirective,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

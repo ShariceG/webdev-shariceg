@@ -12,43 +12,46 @@
   </div>
 </nav>
 
-<div *ngFor="let widget of widgets" class="container cl-container-padding">
-  <div [ngSwitch]="widget.widgetType">
-    <div *ngSwitchCase= '"HEADING"'>
-      <div class="pull-right">
-        <a (click)="editWidget(widget._id)" class="pull-right">
-          <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
-        </a>
-        <a (click) = "widgetList()">
-          <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
-        </a>
-      </div>
-      <h1>{{widget.text}}</h1>
-    </div>
 
-    <div *ngSwitchCase='"IMAGE"'>
-      <div>
+<div appSortable (newIndexes)="reorderWidgets($event)">
+  <div *ngFor="let widget of widgets | orderBy" class="container cl-container-padding">
+    <div [ngSwitch]="widget.widgetType">
+      <div *ngSwitchCase= '"HEADING"'>
+        <div class="pull-right">
+          <a (click)="editWidget(widget._id)" class="pull-right">
+            <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
+          </a>
+          <a (click) = "widgetList()">
+            <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
+          </a>
+        </div>
+        <h1>{{widget.text}}</h1>
+      </div>
+
+      <div *ngSwitchCase='"IMAGE"'>
+        <div>
+          <a (click)="editWidget(widget._id)" class="pull-right">
+            <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
+          </a>
+          <a (click) = "widgetList()" class="pull-right">
+            <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
+          </a>
+          <img class="img-responsive img-rounded cl-widget-images"
+               src="{{widget.url}}">
+        </div>
+      </div>
+
+      <div *ngSwitchCase='"YOUTUBE"'>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe width="640" height="360" [src]="safe(widget.url)" frameborder="0" allowfullscreen></iframe>
+        </div>
         <a (click)="editWidget(widget._id)" class="pull-right">
           <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
         </a>
         <a (click) = "widgetList()" class="pull-right">
           <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
         </a>
-        <img class="img-responsive img-rounded cl-widget-images"
-             src="{{widget.url}}">
       </div>
-    </div>
-
-    <div *ngSwitchCase='"YOUTUBE"'>
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe width="640" height="360" [src]="safe(widget.url)" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <a (click)="editWidget(widget._id)" class="pull-right">
-        <span class="fas fa-cog fontawsome_icon" style="background-color: white"></span>
-      </a>
-      <a (click) = "widgetList()" class="pull-right">
-        <span class="fas fa-bars fontawsome_icon" style="background-color: white"></span>
-      </a>
     </div>
   </div>
 </div>

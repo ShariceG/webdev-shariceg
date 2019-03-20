@@ -62,4 +62,12 @@ export class WidgetListComponent implements OnInit {
     this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
   }
 
+  reorderWidgets(indexes) {
+    // call widget service function to update widget as per index
+    this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
+      .subscribe(
+        (data) => console.log(data)
+      );
+  }
+
 }
