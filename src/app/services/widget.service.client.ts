@@ -39,7 +39,6 @@ export class WidgetService {
     'deleteWidget' : this.deleteWidget
   };
 
-
   createWidget(pageId: String, body: any) {
     const url = 'api/page/' + pageId + '/widget';
     return this._http.post(url, body);
@@ -73,21 +72,6 @@ export class WidgetService {
   findWidgetById(widgetId: string) {
     const url = 'api/widget/' + widgetId;
     return this._http.get(url)
-      .map(
-        (res: Response) => {
-          return res;
-        }
-      );
-  }
-
-  uploadImage(widgetId: string, file: any) {
-    console.log(file);
-    const body = {
-      widgetId: widgetId,
-      file: file
-    };
-    const url = 'api/upload';
-    return this._http.post(url, body)
       .map(
         (res: Response) => {
           return res;
