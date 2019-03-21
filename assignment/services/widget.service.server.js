@@ -1,4 +1,9 @@
+
+
 module.exports=function(app) {
+  
+
+  let baseUrl = "http://localhost:3200/";
 
   let widgets = [
     {"_id": "123", "name": "Heading 1", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -13,6 +18,39 @@ module.exports=function(app) {
       "url": "https://www.youtube.com/embed/AM2Ivdi9c4E"
     }
   ];
+
+  let multer = require('multer');
+  let upload = multer({dest: __dirname+'/../../dist/test-project/assets/uploads'});
+  app.post("/api/upload", upload.single('myFile'), uploadImage);
+  function uploadImage(req, res) {
+    let widgetId      = req.body.widgetId;
+    console.log(widgetId);
+    var width         = req.body.width;
+    console.log(req.body.file);
+    var myFile        = req.file;
+    console.log(myFile);
+
+
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
+
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+
+    var jpgFile = filename + '.jpg';
+    let widget = getWidgetById(widgetId);
+    widget.url = '/uploads/'+filename;
+
+    //var callbackUrl   = baseUrl +'user/'+ userId + '/website/' + websiteId + '/page/' + pageId + '/widget';
+
+    res.send(widget);
+
+  }
 
   app.post("/api/page/:pageId/widget", createWidget);
   function createWidget(req, res) {
@@ -73,13 +111,24 @@ module.exports=function(app) {
 
   function findWidgetById(req, res) {
     let widgetId = req.params.widgetId
+    let widget =  getWidgetById(widgetId);
+    if (widget.name) {
+      res.status(200).send(widget);
+      return;
+    }
+    res.status(404).send(widget);
+  }
+
+  function getWidgetById(widgetId) {
     for (var i in widgets) {
       if (widgets[i]._id === widgetId) {
-        res.status(200).send(widgets[i]);
-        return
+        return widgets[i];
       }
     }
-    res.status(404).send("widget not found!");
+    let body = {
+      message: "widget not found"
+    };
+    return  body;
   }
 
 

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {Heading, Image, YouTube} from '../../../../Models/widget.model.client';
 import {NgForm} from '@angular/forms';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-widget-image',
@@ -12,12 +13,14 @@ import {NgForm} from '@angular/forms';
 export class WidgetImageComponent implements OnInit {
 
   @ViewChild('imageForm') imageForm: NgForm;
+  @ViewChild('uploadForm') uploadForm: NgForm;
 
   userId: string;
   websiteId: string;
   pageId: string;
   widgetId: string;
   widget: Image;
+  baseUrl: string;
 
   errorFlag: boolean;
   errorMessage: string;
@@ -25,6 +28,8 @@ export class WidgetImageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private widgetService: WidgetService) { }
 
   ngOnInit() {
+    this.baseUrl = environment.baseUrl;
+
     this.route.params.subscribe(params => {
       this.errorFlag = false;
       this.errorMessage = ' must be valid image type';
@@ -89,6 +94,21 @@ export class WidgetImageComponent implements OnInit {
     // console.log(newurl);
     // const newWidget = new Image(this.widget._id, this.widget.name, this.widget.pageId, this.widget.text, this.widget.width, newurl);
     // this.widget.url = newurl;
+  }
+
+  uploadImage() {
+    console.log(this.uploadForm);
+    console.log(this.uploadForm.value);
+    const file = this.uploadForm.value.myFile;
+
+
+    this.widgetService.uploadImage(this.widgetId, file)
+      .subscribe(
+        (data: any) => {
+          this.widget = data;
+          this.widgetList();
+        }
+      );
   }
 
 }
