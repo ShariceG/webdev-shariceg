@@ -33,3 +33,16 @@ server.listen( port , () => console.log('Running on port 3200'));
 
 require('./assignment/app')(app);
 
+
+var dbUrl = 'mongodb://heroku_gzllqk94:pte2i4krui750evbh14es83ics@ds121406.mlab.com:21406/heroku_gzllqk94';
+var mongoose = require('mongoose');
+var db = mongoose.connect(dbUrl, {
+  useNewUrlParser: true});
+
+// var cookieParser = require('cookie-parser');
+// var session = require('express-session');
+
+// app.use(cookieParser());
+// app.use(session({secres:process.env.SESSION_SECRET}));
+
+

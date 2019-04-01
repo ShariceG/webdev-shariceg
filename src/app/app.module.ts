@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-
+// import { QuillEditorModule} from 'ngx-quill-editor'
+import { QuillModule } from 'ngx-quill';
 
 import { LoginComponent } from './views/user/login/login.component';
 import { RegisterComponent } from './views/user/register/register.component';
@@ -29,6 +30,8 @@ import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
 import { SortableDirective } from './directives/sortable.directive';
 import { OrderByPipe} from './views/widget/widget-list/order-by-pip.pipe';
+import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
+import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
 
 @NgModule({
   declarations: [
@@ -49,13 +52,17 @@ import { OrderByPipe} from './views/widget/widget-list/order-by-pip.pipe';
     WidgetImageComponent,
     WidgetYoutubeComponent,
     SortableDirective,
-    OrderByPipe
+    OrderByPipe,
+    WidgetHtmlComponent,
+    WidgetTextComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    // QuillEditorModule
+     QuillModule
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService],
   bootstrap: [AppComponent]

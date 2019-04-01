@@ -32,6 +32,7 @@ export class WidgetChooserComponent implements OnInit {
 
   createWidget(type: string) {
     const widgetType = type.toUpperCase();
+    console.log(widgetType);
     switch (widgetType) {
       case 'HEADING': {
         this.body = {
@@ -57,6 +58,26 @@ export class WidgetChooserComponent implements OnInit {
           widgetType: 'IMAGE',
           width: '100%',
           url: ''
+        };
+        break;
+      }
+      case 'HTML': {
+        console.log('HERE AT HTML');
+        this.body = {
+          name: '',
+          widgetType: 'HTML',
+          text: ''
+        };
+        break;
+      }
+      case 'TEXT': {
+        this.body = {
+          name: '',
+          widgetType: 'TEXT',
+          text: '',
+          placeholder: '',
+          rows: '',
+          formatted: true
         };
         break;
       }

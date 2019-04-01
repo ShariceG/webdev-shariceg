@@ -40,6 +40,7 @@ export class WidgetService {
   };
 
   createWidget(pageId: String, body: any) {
+    console.log(body);
     const url = 'api/page/' + pageId + '/widget';
     return this._http.post(url, body);
   }

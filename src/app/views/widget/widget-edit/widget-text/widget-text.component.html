@@ -1,0 +1,65 @@
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <p>
+      <a (click)="widgetList()" class="cl-text-black">
+        <span class="fas fa-chevron-left"></span>
+      </a>
+      <a class="navbar-brand pull-left cl-icon-padding" (click)="widgetEdit()">Widgets Edit</a>
+    </p>
+    <a (click)="updateText()" class="cl-text-black">
+      <span class="fas fa-check fa-pull-right"></span>
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  <!--<div *ngIf=flag-->
+       <!--class="alert alert-danger">-->
+    <!--{{error}}-->
+  <!--</div>-->
+  Text
+  <input [(ngModel)]="widget.text" class="form-control"/>
+  Rows
+  <input [(ngModel)]="widget.rows" class="form-control" type="number"/>
+
+  <label for="Name">Name</label>
+  <div>
+    <input [(ngModel)]="widget.name"
+           type="text"
+           class="form-control"
+           id="Name"
+           name="name"
+           placeholder="Name">
+    <!--<span class="alert-class"-->
+          <!--*ngIf=flag>{{alert}}</span>-->
+  </div>
+
+  Placeholder
+  <input [(ngModel)]="widget.placeholder" class="form-control" required/>
+  <p></p>
+  <div class="input-group">
+    <input type="text"
+           readonly
+           value="Formatted"
+           class="form-control"/>
+    <span class="input-group-addon">
+        <input [(ngModel)]="widget.formatted"
+               type="checkbox"/>
+    </span>
+  </div>
+
+  <p></p>
+
+  <a class="btn btn-danger btn-block "
+     (click)="deleteWidget()">Delete</a>
+</div>
+
+
+
+<nav class="navbar navbar-light bg-light fixed-bottom d-flex flex-row-reverse">
+  <div class="p-2">
+    <a (click) = "profile()" class="nav-text cl-text-blue">
+      <span class="fas fa-user fontawsome_icon"></span>
+    </a>
+  </div>
+</nav>
