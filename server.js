@@ -9,6 +9,17 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+const secret = !!process.env.SESSION_SECRET ? process.env.SESSION_SECRET : 'local_secret'
+app.use(cookieParser());
+app.use(session({secret: secret}));
+
+var passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Point static path to dist -- For building -- REMOVE
 //TODO: Change to public folder with index.html
 app.use(express.static(path.join(__dirname, 'dist/test-project')));
@@ -33,16 +44,9 @@ server.listen( port , () => console.log('Running on port 3200'));
 
 require('./assignment/app')(app);
 
-
+// var dbUrl = 'mongodb://127.0.0.1:27017/webdev';
 var dbUrl = 'mongodb://heroku_gzllqk94:pte2i4krui750evbh14es83ics@ds121406.mlab.com:21406/heroku_gzllqk94';
 var mongoose = require('mongoose');
 var db = mongoose.connect(dbUrl, {
   useNewUrlParser: true});
-
-// var cookieParser = require('cookie-parser');
-// var session = require('express-session');
-
-// app.use(cookieParser());
-// app.use(session({secres:process.env.SESSION_SECRET}));
-
 

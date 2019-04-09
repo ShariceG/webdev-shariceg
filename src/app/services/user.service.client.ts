@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {User} from '../Models/user.model.client';
 import {Observable} from 'rxjs';
+import { SharedService} from './shared.service';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
@@ -10,14 +11,15 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 
-
 @Injectable()
+
 
 export class UserService {
   constructor(private _http: HttpClient, private router: Router) {
   }
 
   baseUrl = environment.baseUrl;
+  sharedService = new SharedService();
 
   users: User[] = [new User('123', 'alice', 'alice', 'Alice', 'Wonder', 'a@email.com'),
     new User('234', 'bob', 'bob', 'Bob', 'Marley', 'b@email.com'),
@@ -31,16 +33,72 @@ export class UserService {
     'findUserByUsername': this.findUserByUsername,
     'findUserByCredentials': this.findUserByCredentials,
     'updateUser': this.updateUser,
-    'deleteUser': this.deleteUser
+    'deleteUser': this.deleteUser,
+    'login': this.login,
+    'logout': this.logout
   };
 
+  logout() {
+    return this._http.get(this.baseUrl + 'api/logout', {withCredentials: true})
+      .map(
+        (res: Response) => {
+          return res;
+        }
+      );
+  }
+
+  login(username: String, password: String) {
+    const body = {
+      username : username,
+      password : password
+    };
+
+    console.log(body);
+    return this._http.post(this.baseUrl + 'api/login', body, {withCredentials: true})
+      .map(
+        (res: Response) => {
+          return res;
+        }
+      );
+  }
+
+  loggedIn() {
+    return this._http.get(this.baseUrl + 'api/loggedin', {withCredentials: true})
+      .map(
+        (res: any) => {
+          const user = res;
+          if (user !== 0) {
+            this.sharedService.user = user;
+            return true;
+          } else {
+            this.router.navigate(['/login']);
+            return false;
+          }
+        }
+      );
+  }
+
+  register(username: String, password: String) {
+    const user = {
+      username: username,
+      password: password
+    };
+
+    return this._http.post(this.baseUrl + 'api/register', user, {withCredentials: true});
+  }
 
   createUser(username: String, password: String) {
     const body = {
       username: username,
       password: password
     };
-    return this._http.post(this.baseUrl + 'api/user', body);
+    return this._http.post(this.baseUrl + 'api/user', body)
+      .map(
+        (res: Response) => {
+          return res;
+          // return data;
+        }
+      );
   }
 
   findUserById(userId: String) {

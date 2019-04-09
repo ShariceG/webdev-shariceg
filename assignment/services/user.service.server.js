@@ -18,9 +18,92 @@ module.exports=function(app) {
 
   const userModel = require('../model/user/user.model.server');
 
-  /*
-  def: add users from
-   */
+  var passport = require('passport')
+  const LocalStrategy = require('passport-local').Strategy;
+
+  passport.use(new LocalStrategy(localStrategy));
+
+
+  function localStrategy(username, password, done) {
+    console.log("username: " + username);
+    console.log("password: " + password);
+
+    userModel
+      .findUserByCredentials(username, password)
+      .then(
+        function(user){
+          if(user.username === username && user.password === password){
+            return done(null, user);
+        }
+          return done(null, false);
+        },
+        function(err){
+          return done(err);
+        }
+      );
+  }
+
+  passport.serializeUser(serializeUser);
+  function serializeUser(user, done){
+    done(null, user);
+  }
+
+  passport.deserializeUser(deserializeUser);
+  function deserializeUser(user, done){
+    userModel.findUserById(user._id)
+      .then(
+        function(user){
+          done(null, user);
+        },
+        function(err){
+          done(err, null);
+        }
+      );
+  }
+
+
+  app.post("/api/login", passport.authenticate('local'),
+  function login(req,res){
+    // console.log(req);
+    var user = req.user;
+    res.send(user);
+  }
+  );
+
+  app.get('/api/loggedin', function(req, res) {
+    // console.log(req.isAuthenticated());
+    res.send(req.isAuthenticated() ? req.user : '0');
+  });
+
+
+  app.get('/api/logout', function(req, res){
+    req.logout();
+    res.send({ message: 'Successfully logged out' });
+  });
+
+
+  app.post('/api/register', register);
+  function register(req, res){
+    var user = req.body;
+    userModel.createUser(user)
+      .then(
+        function (user) {
+          if(user){
+            req.login(user, function(err) {
+              if(err) {
+                res.status(400).send(err);
+              } else {
+                res.send(user);
+              }
+            });
+          }
+        }
+      );
+
+  }
+
+
+
   app.post("/api/populate", populateUsers);
   function populateUsers(req, res) {
     userModel.populateUsers(db_users)

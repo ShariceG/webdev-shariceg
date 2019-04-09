@@ -35,9 +35,9 @@ export class LoginComponent implements OnInit {
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
 
-    console.log('username: ' + this.username, '\npassword: ' + this.password);
+    // console.log('username: ' + this.username, '\npassword: ' + this.password);
 
-    this.userService.findUserByCredentials(this.username, this.password)
+    this.userService.login(this.username, this.password)
       .subscribe(
         (data: any) => {
           this.user = data;
@@ -49,6 +49,19 @@ export class LoginComponent implements OnInit {
           this.errorFlag = true;
         }
       );
+
+    // this.userService.findUserByCredentials(this.username, this.password)
+    //   .subscribe(
+    //     (data: any) => {
+    //       this.user = data;
+    //       this.errorFlag = false;
+    //       this.router.navigate(['/user', this.user._id]);
+    //     },
+    //     (error: any) => {
+    //       console.log('HERE AT ERROR');
+    //       this.errorFlag = true;
+    //     }
+    //   );
       // .subscribe(
       //   (data: any) => {
       //     console.log(data);

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 // import { QuillEditorModule} from 'ngx-quill-editor'
 import { QuillModule } from 'ngx-quill';
+import {AuthGuard} from './services/auth-gaurd.service';
 
 import { LoginComponent } from './views/user/login/login.component';
 import { RegisterComponent } from './views/user/register/register.component';
@@ -64,7 +65,7 @@ import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widg
     // QuillEditorModule
      QuillModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
