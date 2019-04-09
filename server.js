@@ -44,8 +44,8 @@ server.listen( port , () => console.log('Running on port 3200'));
 
 require('./assignment/app')(app);
 
-var dbUrl = 'mongodb://127.0.0.1:27017/webdev';
-//var dbUrl = 'mongodb://heroku_gzllqk94:pte2i4krui750evbh14es83ics@ds121406.mlab.com:21406/heroku_gzllqk94';
+//var dbUrl = 'mongodb://127.0.0.1:27017/webdev';
+var dbUrl = 'mongodb://heroku_gzllqk94:pte2i4krui750evbh14es83ics@ds121406.mlab.com:21406/heroku_gzllqk94';
 var mongoose = require('mongoose');
 var db = mongoose.connect(dbUrl, {
   useNewUrlParser: true});
