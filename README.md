@@ -6,6 +6,8 @@ My Name is Sharice Gilbert. I am a graduate student at Northeastern University
 
 This repo is for Northeastern University's Spring 2019 WebDev class.
 
-## Links
+## Link
 
 [Repo Heroku](https://webdev-gilbert-cs5610.herokuapp.com/)
+
+I hope you would like it!!
